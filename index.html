@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>::: OpenAssistant WebVR :::</title>
+    <meta name="description" content="OpenAssistant WebVR">
+
+    <!-- NOTES /////////////////////////////////////////////////////////////////
+    //
+    // - OpenAssistant WebVR
+    // - for the OpenAssistant AI project: http://openassistant.org
+    // - WebVR space created by Michael Gaio: http://michaelgaio.com
+    //
+    //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+    <!-- A-Frame extras -->
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v2.6.1/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/master/dist/kframe.min.js"></script>
+    <!-- Extras -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+
+    <!-- Models & Shaders -->
+    <script src="components/ground.js"></script>
+    <script src="shaders/skyGradient.js"></script>
+
+  </head>
+  <body>
+
+    <!-- VR SCENE ////////////////////////////////////////////////////////////// -->
+
+    <a-scene fog="color: #99ffbb; near: 0; far: 80;">
+        <a-assets>
+
+            <!-- Brand Images-->
+            <img id="OA-logo" src="images/brand/openassistant_face_256-green.png">
+
+            <!-- Voxy Textures -->
+            <img id="vox-grn-OA"  src="images/voxy/vox-grn-OA.png">
+            <img id="vox-grn-mtx" src="images/grid/grid-green.png">
+
+            <!-- Environment -->
+            <img id="cresent-moon" src="images/environment/cresent-moon.png">
+
+            <!-- Templates ///////////////////////////////////////////////////// -->
+
+            <!-- Voxy Box template -->
+            <script id="voxy-box" type="text/nunjucks">
+                <a-box class ="box"
+                       depth ="1"
+                       height="1"
+                       width ="1"
+                       static-body
+                       material="shader: flat; opacity: 1; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Box (1/2) template -->
+            <script id="voxy-box-2" type="text/nunjucks">
+                <a-box class ="box"
+                       depth ="0.5"
+                       height="0.5"
+                       width ="0.5"
+                       material="shader: flat; opacity: 1; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Box (1/4) template -->
+            <script id="voxy-box-4" type="text/nunjucks">
+                <a-box class ="box"
+                       depth ="0.25"
+                       height="0.25"
+                       width ="0.25"
+                       material="shader: flat; opacity: 1; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Box Frame template -->
+            <script id="voxy-box-frame" type="text/nunjucks">
+                <a-box class ="frame"
+                       depth ="1"
+                       height="1"
+                       width ="1"
+                       material="shader: flat; side: double; opacity: 0.99; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Box Pillar template -->
+            <script id="voxy-pillar" type="text/nunjucks">
+                <a-box class ="pillar"
+                       depth ="1.5"
+                       height="{{ height }}"
+                       width ="1.5"
+                       material="shader: flat; opacity: 0.8; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Box Pillar Wall template -->
+            <script id="voxy-pillar-wall" type="text/nunjucks">
+                <a-entity  class="pillar-wall"
+                    <a-entity template="src: #voxy-pillar" data-texture="#vox-grn-mtx" data-height="2" position="-2.5 1 0" rotation="0 45 0"></a-entity>
+                    <a-entity template="src: #voxy-pillar" data-texture="#vox-grn-mtx" data-height="3" position="0 1.5 0" rotation="0 45 0"></a-entity>
+                    <a-entity template="src: #voxy-pillar" data-texture="#vox-grn-mtx" data-height="4" position="2.5 2 0" rotation="0 45 0"></a-entity>
+                </a-entity>
+            </script>
+
+            <!-- Voxy Cylinder template -->
+            <script id="voxy-cyl" type="text/nunjucks">
+                <a-cylinder class ="cylinder"
+                       height       ="{{ height }}"
+                       radius       ="{{ radius }}"
+                       theta-start  ="{{ thes }}"
+                       material="shader: flat; side: front; opacity: 0.99; src: {{ texture }}">
+                </a-cylinder>
+            </script>
+
+        </a-assets>
+
+        <!-- CAMERAS /////////////////////////////////////////////////////////// -->
+
+        <!-- Basic Camera
+        <a-entity position="-5 0 -0.9">
+            <a-camera></a-camera>
+        </a-entity> -->
+
+        <!-- Advanced Camera with Cursor -->
+        <a-entity   camera
+                    position="-5 1.5 -0.9"
+                    kinematic-body
+                    jump-ability
+                    universal-controls>
+                    <!--
+                    <a-cursor id="cursor" color="#2E3A87">
+                        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+                        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+                    </a-cursor>-->
+        </a-entity>
+
+        <!-- CONTENT /////////////////////////////////////////////////////////// -->
+
+        <!-- Temple -->
+        <a-entity position="-5 0.5 -4">
+
+            <!-- Brand -->
+            <a-plane src="#OA-logo" side="double" position="0 1 0.75" height="1" width="1" opacity="0.99"></a-plane>
+
+            <!-- Voxy boxes -->
+            <a-entity template="src: #voxy-box" data-texture="#vox-grn-OA" position="-2 0 0"></a-entity>
+            <a-entity template="src: #voxy-box" data-texture="#vox-grn-OA" position="0 0 0"></a-entity>
+            <a-entity template="src: #voxy-box" data-texture="#vox-grn-OA" position="2 0 0"></a-entity>
+            <a-entity template="src: #voxy-box" data-texture="#vox-grn-OA" position="-1 1 0"></a-entity>
+            <a-entity template="src: #voxy-box" data-texture="#vox-grn-OA" position="1 1 0"></a-entity>
+            <a-entity template="src: #voxy-box" data-texture="#vox-grn-OA" position="0 2 0"></a-entity>
+
+            <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="-2.75 -0.25 0.25"></a-entity>
+            <a-entity template="src: #voxy-box-4" data-texture="#vox-grn-OA" position="-1.375 -0.375 0.375"></a-entity>
+            <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="2.75 -0.25 0.25"></a-entity>
+            <a-entity template="src: #voxy-box-4" data-texture="#vox-grn-OA" position="1.375 -0.375 0.375"></a-entity>
+            <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="-1.25 -0.25 0"></a-entity>
+            <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="1.25 -0.25 0"></a-entity>
+            <a-entity template="src: #voxy-box-4" data-texture="#vox-grn-OA" position="-4.7 -0.25 -0.56" rotation="0 55 0"></a-entity>
+
+            <!-- Pillar Walls -->
+            <a-entity position="0 -0.5 -5">
+                <a-entity template="src: #voxy-pillar-wall" position="7.5 0 0" rotation="0 180 0"></a-entity>
+                <a-entity template="src: #voxy-pillar-wall" position="-7.5 0 0" rotation="0 0 0"></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <!-- Big OA face -->
+        <a-plane src="#OA-logo" side="double" position="5 27 80" height="30" width="30" opacity="0.99" look-at="[camera]"></a-plane>
+
+        <!-- Test Cylinder -->
+        <a-entity   template="src: #voxy-cyl" position="-5 1.5 10" rotation="0 180 0"
+                    data-texture="#vox-grn-mtx"
+                    data-height="3" data-radius="1" data-thes="180" visible="false"></a-entity>
+
+        <!-- ENVIRONMENT /////////////////////////////////////////////////////// -->
+
+        <!-- Sky -->
+        <a-entity   id="sky"
+                    geometry="primitive: sphere; radius: 100;"
+                    material="shader: skyGradient; side: back; colorTop: #009933; colorBottom: #33FFaa;"></a-entity>
+
+        <!-- Moon -->
+        <a-plane position="25 35 -85" height="10" width="10" opacity="0.33" src="#cresent-moon" look-at="[camera]"></a-plane>
+
+        <!-- Terrain -->
+        <a-entity   ground
+                    position="0 -0.08 0"
+                    rotation="0 110 0">
+        </a-entity>
+
+        <!-- Grid -->
+        <a-grid     static-body
+                    material="src: url(images/grid/grid-green.png); repeat: 275 275"
+                    width ="275" height ="275">
+        </a-grid>
+
+    </a-scene>
+
+  </body>
+</html>
