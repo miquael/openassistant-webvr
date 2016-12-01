@@ -2,7 +2,7 @@
 
 An WebVR space for the open source [OpenAssistant](http://openassistant.org/) AI project.
 
-See a [demo](http://michaelgaio.com/vr/openassistant/)
+See a [demo](http://michaelgaio.com/vr/openassistant/)!
 
 Use: W A S D keys to move around in space.  Space bar is jump!
 
@@ -38,8 +38,7 @@ Will automatically launch into the browser and do live updating when changes are
 
 ## Authors
 
-* **Michael Gaio** - *Initial work* - [miquael](https://github.com/miquael)
-* [MichaelGaio.com](http://www.michaelgaio.com)
+* [Michael Gaio](http://www.michaelgaio.com) - [miquael](https://github.com/miquael) - *Initial work*
 
 ## License
 
