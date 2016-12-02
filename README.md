@@ -1,6 +1,6 @@
-# OpenAssistant VR
+# OpenAssistant WebVR
 
-An WebVR space for the open source [OpenAssistant](http://openassistant.org/) AI project.
+A WebVR space for the open source [OpenAssistant](http://openassistant.org/) AI project.
 
 See a [demo](http://michaelgaio.com/vr/openassistant/)!
 
@@ -14,7 +14,7 @@ Use: W A S D keys to move around in space.  Space bar is jump!
 
 To run locally, simply just open the index.html in a WebVR enabled web browser.
 
-If develop locally, it's recommended to utilize Node.js for live updating (see Local Development below).
+To develop locally, it's recommended to utilize Node.js for live updating (see Local Development below).
 
 To run remotely, just upload index.html, images, shaders, and components onto any standard web server.  
 
