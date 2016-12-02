@@ -51,3 +51,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * See [Vavrek's](https://github.com/vavrek) open source [OpenAssistant GitHub](https://github.com/vavrek/openassistant)
+* Thanks to [ngokevin](https://github.com/ngokevin) for his [kframe](https://github.com/ngokevin/kframe)
+* Thanks to [donmccurdy](https://github.com/donmccurdy) for his [aframe-extras](https://github.com/donmccurdy/aframe-extras)

@@ -1,25 +1,28 @@
 {
   "name": "openassistant-webvr",
   "description": "A WebVR space for the OpenAssistant AI project.",
-  "version": "0.0.1",
+  "author": "Michael Gaio - www.michaelgaio.com",
+  "version": "0.0.11",
   "license": "MIT",
   "scripts": {
-    "start": "budo --live --verbose --port 3000 --open",
-    "deploy": "ghpages",
-    "ghpages": "ghpages"
+    "start": "budo --live --verbose --port 3000 --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miquael/openassistant-webvr"
   },
   "devDependencies": {
-    "budo": "^7.0.0",
-    "ghpages": "0.0.3"
+    "budo": "^7.0.0"
   },
   "keywords": [
     "openassistant",
     "ai",
     "3d",
+    "vr",
+    "webvr",
     "aframe",
     "aframe-example",
-    "aframe-scene",
-    "webvr",
-    "vr"
+    "aframe-boilerplate",
+    "aframe-scene"
   ]
 }
