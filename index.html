@@ -18,6 +18,8 @@
     <!-- A-Frame extras -->
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v2.6.1/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/ngokevin/kframe/master/dist/kframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
     <!-- Extras -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
 
@@ -39,6 +41,10 @@
             <!-- Voxy Textures -->
             <img id="vox-grn-OA"  src="images/voxy/vox-grn-OA.png">
             <img id="vox-grn-mtx" src="images/grid/grid-green.png">
+
+            <img id="matrix-gif1"  src="images/gifs/matrix1.gif">
+            <img id="matrix-gif2"  src="images/gifs/matrix2.gif">
+            <img id="nyancat-gif" src="images/gifs/nyancat.gif">
 
             <!-- Environment -->
             <img id="cresent-moon" src="images/environment/cresent-moon.png">
@@ -92,16 +98,16 @@
                        depth ="1.5"
                        height="{{ height }}"
                        width ="1.5"
-                       material="shader: flat; opacity: 0.8; src: {{ texture }}">
+                       material="shader: gif; opacity: 0.8; src: {{ texture }}">
                 </a-box>
             </script>
 
             <!-- Voxy Box Pillar Wall template -->
             <script id="voxy-pillar-wall" type="text/nunjucks">
                 <a-entity  class="pillar-wall"
-                    <a-entity template="src: #voxy-pillar" data-texture="#vox-grn-mtx" data-height="2" position="-2.5 1 0" rotation="0 45 0"></a-entity>
-                    <a-entity template="src: #voxy-pillar" data-texture="#vox-grn-mtx" data-height="3" position="0 1.5 0" rotation="0 45 0"></a-entity>
-                    <a-entity template="src: #voxy-pillar" data-texture="#vox-grn-mtx" data-height="4" position="2.5 2 0" rotation="0 45 0"></a-entity>
+                    <a-entity template="src: #voxy-pillar" data-texture="#matrix-gif2" data-height="2" position="-2.5 1 0" rotation="0 45 0"></a-entity>
+                    <a-entity template="src: #voxy-pillar" data-texture="#matrix-gif2" data-height="3" position="0 1.5 0" rotation="0 45 0"></a-entity>
+                    <a-entity template="src: #voxy-pillar" data-texture="#matrix-gif2" data-height="4" position="2.5 2 0" rotation="0 45 0"></a-entity>
                 </a-entity>
             </script>
 
@@ -124,13 +130,13 @@
             <a-camera></a-camera>
         </a-entity> -->
 
-        <!-- Fly Camera ::: fly, but no floor -->
+        <!-- Fly Camera ::: fly, but no floor
         <a-entity position="-5 1.5 -0.9" rotation="0 0 0">
           <a-entity camera universal-controls wasd-controls="fly: true">
           </a-entity>
-        </a-entity>
+        </a-entity>-->
 
-        <!-- Advanced Camera with Cursor
+        <!-- Advanced Camera with Cursor -->
         <a-entity   camera
                     position="-5 1.5 -0.9"
                     kinematic-body
@@ -141,7 +147,7 @@
                         <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
                         <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
                     </a-cursor>
-        </a-entity>-->
+        </a-entity>
 
         <!-- CONTENT /////////////////////////////////////////////////////////// -->
 
@@ -166,6 +172,8 @@
             <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="-1.25 -0.25 0"></a-entity>
             <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="1.25 -0.25 0"></a-entity>
             <a-entity template="src: #voxy-box-4" data-texture="#vox-grn-OA" position="-4.7 -0.25 -0.56" rotation="0 55 0"></a-entity>
+
+            <a-entity position="0 1 .5" geometry="primitive:plane; width:1; height:1;" material="shader:gif; src:#matrix-gif1; color:green;" data-label="left middle"></a-entity>
 
             <!-- Pillar Walls -->
             <a-entity position="0 -0.5 -5">
