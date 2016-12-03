@@ -123,20 +123,21 @@
 
         </a-assets>
 
-        <!-- CAMERAS /////////////////////////////////////////////////////////// -->
+        <!-- CAMERAS ///////////////////////////////////////////////////////////
+        // 3 types of camera to choose from (choose only one at a time) -->
 
         <!-- Basic Camera
         <a-entity position="-5 0 -0.9">
             <a-camera></a-camera>
         </a-entity> -->
 
-        <!-- Fly Camera ::: fly, but no floor
+        <!-- Fly Camera ::: fly, but no floor -->
         <a-entity position="-5 1.5 -0.9" rotation="0 0 0">
           <a-entity camera universal-controls wasd-controls="fly: true">
           </a-entity>
-        </a-entity>-->
+        </a-entity>
 
-        <!-- Advanced Camera with Cursor -->
+        <!-- Advanced Camera with Cursor, kinematics, jump, best controls
         <a-entity   camera
                     position="-5 1.5 -0.9"
                     kinematic-body
@@ -147,7 +148,7 @@
                         <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
                         <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
                     </a-cursor>
-        </a-entity>
+        </a-entity> -->
 
         <!-- CONTENT /////////////////////////////////////////////////////////// -->
 
@@ -173,7 +174,8 @@
             <a-entity template="src: #voxy-box-2" data-texture="#vox-grn-OA" position="1.25 -0.25 0"></a-entity>
             <a-entity template="src: #voxy-box-4" data-texture="#vox-grn-OA" position="-4.7 -0.25 -0.56" rotation="0 55 0"></a-entity>
 
-            <a-entity position="0 1 .5" geometry="primitive:plane; width:1; height:1;" material="shader:gif; src:#matrix-gif1; color:green;" data-label="left middle"></a-entity>
+            <!-- Matrix background -->
+            <a-entity position="0 1 .5" geometry="primitive:plane; width:1; height:1;" material="shader:gif; src:#matrix-gif1;" data-label="left middle"></a-entity>
 
             <!-- Pillar Walls -->
             <a-entity position="0 -0.5 -5">
@@ -184,6 +186,9 @@
 
         <!-- Big OA face -->
         <a-plane src="#OA-logo" side="double" position="5 27 80" height="30" width="30" opacity="0.99" look-at="[camera]"></a-plane>
+
+        <!-- Nyan Cat -->
+        <a-entity position="0 1 5" geometry="primitive:plane; width:1; height:1;" material="shader:gif; src:#nyancat-gif;" data-label="left middle"></a-entity>
 
         <!-- Test Cylinder -->
         <a-entity   template="src: #voxy-cyl" position="-5 1.5 10" rotation="0 180 0"
