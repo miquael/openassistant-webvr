@@ -2,9 +2,11 @@
 
 A WebVR space for the open source [OpenAssistant](http://openassistant.org/) AI project.
 
-See a [demo](http://michaelgaio.com/vr/openassistant/)!
+See a strange [video demo](https://youtu.be/F4SOS5cs7gU)!
 
-Use: W A S D keys to move around in space.  Space bar is jump!
+Try the WebVR [demo space](http://michaelgaio.com/vr/openassistant/)!
+
+Use: Mouse and W A S D keys to look and move around in space.  Space bar is jump!
 
 [![OA-VR-0.0.11.png](https://s3.postimg.org/v3n3q4t3n/OA_VR_0_0_11.png)](https://postimg.org/image/k41wej2of/)
 
