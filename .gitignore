@@ -2,3 +2,6 @@ _RESOURCES
 node_modules
 npm-debug.log
 .DS_Store
+white-room/.DS_Store
+white-room/node_modules
+white-room/package.json

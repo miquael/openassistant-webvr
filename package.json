@@ -2,7 +2,7 @@
   "name": "openassistant-webvr",
   "description": "A WebVR space for the OpenAssistant AI project.",
   "author": "Michael Gaio - www.michaelgaio.com",
-  "version": "0.0.11",
+  "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "start": "budo --live --verbose --port 3000 --open"

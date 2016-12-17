@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>::: OpenAssistant - White Room - WebVR :::</title>
+    <meta name="description" content="OpenAssistant WebVR">
+
+    <!-- NOTES /////////////////////////////////////////////////////////////////
+    //
+    // - OpenAssistant WebVR
+    // - for the OpenAssistant AI project: http://openassistant.org
+    // - WebVR space created by Michael Gaio: http://michaelgaio.com
+    //
+    //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+    <!-- A-Frame extras -->
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v2.6.1/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/master/dist/kframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
+    <!-- Extras -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+
+  </head>
+  <body>
+
+    <!-- VR SCENE ////////////////////////////////////////////////////////////// -->
+
+    <a-scene>
+        <a-assets>
+
+            <!-- Brand Images-->
+            <img id="OA-logo" src="images/brand/openassistant_face_256-green.png">
+
+            <!-- Voxy Textures -->
+            <img id="vox-grn-OA"  src="images/voxy/vox-grn-OA.png">
+            <img id="vox-grn-screen"  src="images/artifacts/matrix-tv-screen.png">
+
+            <!--
+            <img id="matrix-gif1"  src="images/gifs/matrix1.gif">
+            <img id="matrix-gif3"  src="images/gifs/matrix3.gif">-->
+
+            <!-- Pills -->
+            <img id="red-pill"  src="images/pills/red-pill.png">
+            <img id="blu-pill"  src="images/pills/blue-pill.png">
+
+            <!-- Environment -->
+
+            <!-- Models -->
+            <a-asset-item id="door-obj" src="./models/white-door.obj"></a-asset-item>
+            <a-asset-item id="door-mtl" src="./models/white-door.mtl"></a-asset-item>
+
+            <!-- Models & Shaders -->
+            <script src="shaders/skyGradient.js"></script>
+
+            <!-- Templates ///////////////////////////////////////////////////// -->
+
+            <!-- Voxy Box template -->
+            <script id="voxy-box" type="text/nunjucks">
+                <a-box class ="box"
+                       depth ="1"
+                       height="1"
+                       width ="1"
+                       material="shader: flat; opacity: 1; src: {{ texture }}"
+                       static-body>
+                </a-box>
+            </script>
+
+            <!-- Voxy Box (1/2) template -->
+            <script id="voxy-box-2" type="text/nunjucks">
+                <a-box class ="box"
+                       depth ="0.5"
+                       height="0.5"
+                       width ="0.5"
+                       material="shader: flat; opacity: 1; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Box (1/4) template -->
+            <script id="voxy-box-4" type="text/nunjucks">
+                <a-box class ="box"
+                       depth ="0.25"
+                       height="0.25"
+                       width ="0.25"
+                       material="shader: flat; opacity: 1; src: {{ texture }}">
+                </a-box>
+            </script>
+
+            <!-- Voxy Cylinder template -->
+            <script id="voxy-cyl" type="text/nunjucks">
+                <a-cylinder class ="cylinder"
+                       height       ="{{ height }}"
+                       radius       ="{{ radius }}"
+                       theta-start  ="{{ thes }}"
+                       material="shader: flat; side: front; opacity: 0.99; src: {{ texture }}">
+                </a-cylinder>
+            </script>
+
+        </a-assets>
+
+        <!-- CAMERAS ///////////////////////////////////////////////////////////
+        // 3 types of camera to choose from (choose only one at a time) -->
+
+        <!-- Basic Camera
+        <a-entity position="-5 0 -0.9">
+            <a-camera></a-camera>
+        </a-entity> -->
+
+        <!-- Fly Camera ::: fly, but no floor
+        <a-entity position="-5 1.5 -0.9" rotation="0 0 0">
+          <a-entity camera universal-controls wasd-controls="fly: true">
+          </a-entity>
+        </a-entity>-->
+
+        <!-- Advanced Camera with Cursor, kinematics, jump, best controls -->
+        <!-- position="-5 1.5 -0.9" -->
+        <a-entity   camera
+                    position="0 1.5 4.5"
+                    kinematic-body
+                    jump-ability
+                    universal-controls>
+                    <!--
+                    <a-cursor id="cursor" color="#2E3A87">
+                        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+                        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+                    </a-cursor>-->
+        </a-entity>
+
+        <!-- CONTENT /////////////////////////////////////////////////////////// -->
+
+        <!-- Room -->
+        <a-entity id="room-cyl"
+                  position="0 2.5 0"
+                	geometry="primitive:cylinder; height: 5; openEnded: true; radius:5 segmentsHeight: 10; segmentsRadial: 36: thetaLength: 360; thetaStart: 0"
+	                material="src: #vox-grn-screen; metalness: 0.7; repeat: 52 10; roughness: 1; shader: standard; side:back; transparent: false;"
+                  static-body>
+        </a-entity>
+        <a-ring position="0 5 0" rotation="90 0 0" color="#FFFFFF" radius-inner="4" radius-outer="5.25"></a-ring>
+
+        <!-- Door (Back)-->
+        <a-entity id="door" position="0 0 4.9" rotation="0 180 0">
+            <a-entity obj-model="obj: #door-obj; mtl: #door-mtl"
+                      scale="0.001 0.001 0.001"
+                      material="shader: standard; metalness: 0.7;">
+            </a-entity>
+            <!-- frame -->
+            <a-box position="0 1 -0.025"
+                   height="2.75"
+                   width="1.25"
+                   depth="0.05"
+                   color="#000000">
+            </a-box>
+        </a-entity>
+
+        <!-- Door - Red -->
+        <a-entity id="door" position="-4.5 0 -2" rotation="0 65 0">
+            <a-entity obj-model="obj: #door-obj; mtl: #door-mtl"
+                      scale="0.001 0.001 0.001"
+                      material="shader: standard; metalness: 0.7;">
+            </a-entity>
+            <!-- frame -->
+            <a-box position="0 1 -0.025"
+                   height="2.75"
+                   width="1.25"
+                   depth="0.05"
+                   color="#000000">
+            </a-box>
+            <!-- pill -->
+            <a-plane position="0 2.285 0.01"
+                   height="0.25"
+                   width="0.5"
+                   src="#red-pill"
+                   transparent="true">
+            </a-plane>
+        </a-entity>
+
+        <!-- Door - Blue -->
+        <a-entity id="door" position="4.5 0 -2" rotation="0 -65 0">
+            <a-entity obj-model="obj: #door-obj; mtl: #door-mtl"
+                      scale="0.001 0.001 0.001"
+                      material="shader: standard; metalness: 0.7;">
+            </a-entity>
+            <!-- frame -->
+            <a-box position="0 1 -0.025"
+                   height="2.75"
+                   width="1.25"
+                   depth="0.05"
+                   color="#000000">
+            </a-box>
+            <!-- pill -->
+            <a-plane position="0 2.285 0.01"
+                   height="0.25"
+                   width="0.5"
+                   src="#blu-pill"
+                   transparent="true">
+            </a-plane>
+        </a-entity>
+
+        <!-- ENVIRONMENT /////////////////////////////////////////////////////// -->
+
+        <!-- Sky -->
+        <a-entity   id="sky"
+                    geometry="primitive: sphere; radius: 20;"
+                    material="shader: skyGradient; side: back; colorTop: #EEFFEE; colorBottom: #33FFaa;"></a-entity>
+
+        <!-- Lighting-->
+        <a-light color="#ffffff" type="ambient"></a-light>
+
+        <!-- Grid -->
+        <a-grid     static-body
+                    material="src: url(images/grid/grid-wht-grn.png); repeat: 12 12"
+                    width ="12" height ="12">
+        </a-grid>
+
+    </a-scene>
+
+  </body>
+</html>
